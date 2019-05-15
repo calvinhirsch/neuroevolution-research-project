@@ -4,6 +4,13 @@ import neat
 import os
 import visualize
 
+# Frequency that the program saves checkpoints
+CHECKPOINT_FREQ = 50;
+# Maximum generations to run (set to 99999999 to run forever, can be stopped manually)
+MAX_GENS = 3000;
+# Checkpoint to load from (set to 0 to start from scratch)
+LOAD_CHECKPOINT = 0;
+
 pygame.init()
 screen = pygame.display.set_mode((800, 800))
 pygame.display.set_caption("Simulation")
@@ -100,15 +107,17 @@ def runNEAT():
 	config_path = os.path.join(local_dir, 'config')
 	config = neat.Config(neat.DefaultGenome, neat.DefaultReproduction, neat.DefaultSpeciesSet, neat.DefaultStagnation, config_path)
 	
-	#population = neat.Population(config)
-	population = neat.Checkpointer.restore_checkpoint("neat-checkpoint-1956")
+	if (LOAD_CHECKPOINT != 0):
+		population = neat.Checkpointer.restore_checkpoint("neat-checkpoint-" + LOAD_CHECKPOINT)
+	else:
+		population = neat.Population(config)
 	
 	population.add_reporter(neat.StdOutReporter(True))
 	stats = neat.StatisticsReporter()
 	population.add_reporter(stats)
-	population.add_reporter(neat.Checkpointer(50))
+	population.add_reporter(neat.Checkpointer(CHECKPOINT_FREQ))
 	
-	winner = population.run(evaluateFitness, 2018)
+	winner = population.run(evaluateFitness, MAX_GENS)
 
 	visualize.draw_net(config, winner, True, node_names=nodeNames)
 	visualize.plot_stats(stats, ylog=False, view=True)
