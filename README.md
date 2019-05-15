@@ -26,6 +26,6 @@ MAX_GENS = 3000;
 LOAD_CHECKPOINT = 0;
 ```
 
-The other most likely thing to customize would be the NEAT config file (titled 'config' in the home directory). The NEAT python documentation has descriptions for each config property.
+The other most likely thing to customize would be the NEAT config file (titled 'config' in the home directory), which allows you to dictate many aspects of the algorithm. The NEAT python documentation has descriptions for each config property.
 
 Configs and checkpoints can be saved and later loaded/used to return to an in-progress run.
