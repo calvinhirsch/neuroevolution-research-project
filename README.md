@@ -1,6 +1,7 @@
 # Evaluating NEAT-Generated Neural Networks
 
 Full paper: https://docs.google.com/document/d/1RYDobGnhtztXG-a5bSxn1BJhVQe_emYEOz620gRUkPE/edit?usp=sharing
+Made in 2017-2018 for Honors Science Research class.
 
 ## Overview
 
